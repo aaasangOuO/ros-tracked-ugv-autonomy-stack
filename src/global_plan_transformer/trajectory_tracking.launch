@@ -1,0 +1,6 @@
+<launch>
+
+  <node pkg="global_plan_transformer" type="global_plan_transformer" name="global_plan_transformer" output="screen" required="true">
+  </node>
+
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+
+  <arg name="originOffsetX" default="441473.02555351605"/>
+  <arg name="originOffsetY" default="4423300.015293108"/>
+  <arg name="originOffsetZ" default="53.69023571629077"/>
+
+  <node pkg="map_to_odom" type="map_to_odom_2" name="map_to_odom_2" output="screen" required="true">
+    <param name="originOffsetX" type="double" value="$(arg originOffsetX)" />
+    <param name="originOffsetY" type="double" value="$(arg originOffsetY)" />
+    <param name="originOffsetZ" type="double" value="$(arg originOffsetZ)" />
+  </node>
+
+</launch>

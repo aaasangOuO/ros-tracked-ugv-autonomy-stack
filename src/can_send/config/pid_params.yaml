@@ -1,0 +1,30 @@
+cansend_outerpi_node:
+  # 车辆物理参数
+  wheel_base: 0.50      # 轮距 (米)
+  
+  # 控制频率和看门狗
+  loop_hz: 100.0        # 控制循环频率 (Hz)
+  watchdog_sec: 0.5     # 看门狗超时时间 (秒)
+  
+  # 速度限制
+  max_vx: 0.6           # 最大线速度 (m/s)
+  max_wz: 1.5           # 最大角速度 (rad/s)
+  max_ax: 0.6           # 最大线加速度 (m/s²)
+  max_aw: 2.0           # 最大角加速度 (rad/s²)
+  
+  # 反馈控制参数
+  kp_linear: 0.5        # 线速度比例系数
+  ki_linear: 0.2        # 线速度积分系数
+  kp_angular: 0.7       # 角速度比例系数
+  ki_angular: 0.2       # 角速度积分系数
+  
+  # 相位超前补偿参数
+  lead_compensation_enable: true   # 是否启用相位超前补偿
+  lead_time_constant: 0.5          # 超前时间常数(秒)：补偿系统延迟
+  lead_filter_alpha: 0.3           # 超前滤波器系数(0~1)：平滑补偿输出
+  
+  # 电机反馈参数
+  motor_feedback_alpha: 0.3        # 电机反馈低通滤波系数(0~1)
+  
+  # 转速转换参数 (固定值)
+  # rpm_per_mps: 762.71  # 每米/秒对应的RPM (代码中硬编码) 

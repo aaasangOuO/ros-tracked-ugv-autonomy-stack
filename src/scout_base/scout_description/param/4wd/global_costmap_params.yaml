@@ -1,0 +1,61 @@
+# global_costmap:
+#   global_frame: map #定义了代价地图应该运行的坐标系，在这种情况下，我们将选择map坐标系。
+#                     #对于全局代价地图，我们用map框架来作为global框架。
+#   robot_base_frame: base_footprint #定义了代价地图应该为机器人的基座的坐标系。
+#                                    #这个通常不是base_link就是base_footprint。
+#                                    #对于turtlebot应设为base_footprint
+#   #通过global_frame和robot_base_frame就可以计算两个坐标系之间的变换，得知机器人在全局坐标系global_frame中的坐标了
+
+#   update_frequency: 0.3 #before: 5.0 #决定了代价地图更新的频率（以Hz为单位）
+#                                      #根据传感器数据，全局地图更新的频率
+#                                      #这个数值越大，你的计算机的CPU负担会越重
+#                                      #特别对于全局地图，通常设定一个相对较小、在1.0到5.0之间的值
+#   publish_frequency: 0.3 #before 0.5 #决定代价地图发布可视化信息的速率（以Hz为单位），只用于Rviz可视化，这个参数没必要太大
+#   # static_map: true  #确定是否由map_server提供的地图服务来进行代价地图的初始化,因为全局地图都是静态的，一般都设置为true
+#                     #如果没有使用现有的地图或地图服务器，将static_map参数设置为false。
+#                     #当本地地图需要根据传感器数据动态更新的时候，我们通常会把这个参数设为false。
+#   transform_tolerance: 0.5 #坐标系间的转换可以忍受的最大延时
+#   cost_scaling_factor: 10.0 #膨胀过程中应用到代价值的比例因子，增大该比例因子会降低代价值
+#                             #cost_scaling_factor越大，膨胀点越宽，代价地图的边界越平滑，使得机器人越来越靠中间，远离墙边或障障碍物
+# #inflation_radius: 0.55
+#   obstacle_layer:
+#     observation_sources: laser_scan
+#     laser_scan: {data_type: LaserScan, topic: /scan, marking: true, clearing: true}
+#   static_layer:
+#     map_topic: "/map"  # 确保加载正确的地图话题
+#     subscribe_to_updates: true  # 如果地图是静态的，可以不订阅更新
+
+# #在global_costmap中使用下面插件来融合不同图层
+# plugins: 
+#   - {name: static_layer, type: "costmap_2d::StaticLayer"}
+#   - {name: obstacles_laser, type: "costmap_2d::ObstacleLayer"}
+#   - {name: inflation, type: "costmap_2d::InflationLayer"}
+
+# # obstacles_laser:
+# #   observation_sources: laser_scan
+# #   laser_scan: {data_type: LaserScan, topic: /scan, clearing: true, marking: true}
+
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_footprint
+  update_frequency: 0.3
+  publish_frequency: 0.3
+  #static_map: true
+  transform_tolerance: 0.5
+  cost_scaling_factor: 10.0
+
+  # 配置各个插件
+  plugins: 
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacles_laser, type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation, type: "costmap_2d::InflationLayer"}
+
+  # 静态地图配置
+  static_layer:
+    map_topic: "/map"
+    subscribe_to_updates: false
+
+  # 障碍物层配置
+  obstacle_layer:
+    observation_sources: laser_scan
+    laser_scan: {data_type: LaserScan, topic: /scan, marking: true, clearing: true}

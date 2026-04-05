@@ -1,0 +1,20 @@
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+  update_frequency: 1.0
+  publish_frequency: 1.0
+  static_map: true
+  transform_tolerance: 1.0
+  inflation_radius: 0.3
+
+  plugins: 
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: inflation, type: "costmap_2d::InflationLayer"}
+
+  recovery_behaviors:
+    - name: "clear_costmap"
+    - type: "clear_costmap_recovery/ClearCostmapRecovery"
+
+  clear_costmap:
+    reset_distance: 0.0
+    layer_names: ["obstacle_layer"]

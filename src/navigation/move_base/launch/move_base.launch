@@ -1,0 +1,31 @@
+<launch>
+  <!-- 启动 move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find move_base)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find move_base)/config/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find move_base)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find move_base)/config/base_local_planner_params.yaml" command="load" />
+    <!-- <rosparam file="$(find move_base)/config/teb_local_planner.yaml" command="load" /> -->
+    <!-- <rosparam file="$(find move_base)/config/costmap_common_params.yaml" command="load" /> -->
+  </node>
+  
+  
+  
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find scout_description)/maps/map0225c.yaml" output="screen">
+    <!-- <param name="frame_id" value="map"/> -->
+  </node>
+  
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <!-- <rosparam file="$(find scout_description)/param/amcl_params.yaml" command="load" /> -->
+  </node>
+
+  
+  
+  <!-- 启动 map_server 以发布静态地图 -->
+  
+<!--- Run AMCL -->
+ 
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find scout_description)/rviz/mapping.rviz" />
+
+</launch>

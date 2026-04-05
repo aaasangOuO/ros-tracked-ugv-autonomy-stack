@@ -1,0 +1,9 @@
+float32 x
+float32 y
+float32 z
+float32 vx
+float32 vy
+float32 length
+float32 width
+float32 probability
+time timestamp

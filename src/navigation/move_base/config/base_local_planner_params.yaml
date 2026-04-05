@@ -1,0 +1,48 @@
+DWAPlannerROS:
+  max_vel_trans: 1.0 #机器人最大平移速度
+  min_vel_trans: 0.01 #机器人最小平移速度
+  max_vel_x: 1.0 #x轴上最大速度
+  min_vel_x: -0.1 #x轴最小速度（后退）x轴最小速度（后退）
+  max_vel_y: 0.0 #y轴
+  min_vel_y: 0.0
+  max_vel_theta: 1.0 #机器人的最大旋转速度，单位是弧度/秒
+  min_vel_theta: -1.0
+  acc_lim_x: 3.0 #x轴加速度极限
+  acc_lim_y: 0.0
+  acc_lim_th: 8.0 #角加速度极限
+  acc_lim_trans: 10 #机器人在平移(x or y)方向的极限加速度
+
+  prune_plan: false #机器人前进是是否清除身后1m外的轨迹，机器人行走1m后，结束动作
+
+  xy_goal_tolerance: 0.4 #到达目标点时,在xy平面内与目标点的距离允许误差
+  yaw_goal_tolerance: 0.5 #0.1 #到达目标点时偏行角允许的误差，单位弧度
+  trans_stopped_vel: 0.1 #机器人被认属于“停止”状态时的平移速度。
+  theta_stopped_vel: 0.1 #机器人被认属于“停止”状态时的角速度。
+  sim_time: 3.5 #前向模拟轨迹的时间，单位为s
+                #可以将模拟时间sim_time视为允许机器人以采样速度移动的时间。
+                #仿真时间越长，计算负荷越大，同时规划器产生的路径也会变长。
+                #如果将仿真时间设置为非常低的值(≤2.0) 将导致性能有限,特别是当机器人需要通过狭窄的门口或家具之间的间隙时，因为
+                #没有足够的时间来获得最佳轨迹来通过狭窄的通道。另一方面，由于使用DWA本地规划器，所有的轨迹都是简单的圆弧，如果
+                #将仿真时间设置的非常高(>=5.0)，会导致长曲线不是非常灵活。因为规划器在每个时间间隔后都会积极地重新规划，可以进
+                #行小的调整。对于高性能的计算机，4.0秒的值也是足够的。
+  sim_granularity: 0.1 #模拟步长，轨迹上采样点之间的距离，影响轨迹上点的密集程度。单位米
+  angular_sim_granularity: 0.1 #模拟角度轨迹的弧长（弧度）
+  pdist_scale: 0.6 #地图单元格的路径距离系数，默认为0.6，决定有多接近路径
+  gdist_scale: 0.8 #地图单元格两点距离的系数，默认为0.6，决定有多接近局部目标
+  path_distance_bias: 20 #DWA规划结果与全局路径接近程度的权重。较大的值将使本地规划器更倾向于跟踪全局路径
+  goal_distance_bias: 30 #是机器人尝试到达目标点的权重。实验表明增加 goal_distance_bias 值，会使规划路径与全局路径的一致性偏低
+  occdist_scale: 0.01 #定义控制器躲避障碍物的权重，这个值偏大容易导致机器人陷入困境
+  twirling_scale: 0.0 
+  stop_time_buffer: 0.5 #为防止碰撞，机器人必须提前停止的时间长度
+  oscillation_reset_dist: 0.05 #机器人至少走多少米，才不会被认为陷入了震荡
+  oscillation_reset_angle: 0.2  #0.1 #机器人至少旋转多少角度（弧度），才不会被认为陷入了震荡
+  forward_point_distance: 0.3 #以机器人为中心，额外放置一个计分点的距离
+  scaling_speed: 0.4 #开始缩放机器人footprint的机器人底盘的速度（m/s）
+  max_scaling_factor: 0.2 #最大缩放参数，机器人在运动时的footprint的缩放比例
+  vx_samples: 30 #x方向速度空间的采样点数
+  vy_samples: 0 #y方向速度空间的采样点数
+  vth_samples: 60 #旋转方向的速度空间采样点数
+
+  use_dwa: true
+  restore_defaults: false
+  base_local_planner: "dwa_local_planner/DWAPlannerROS"

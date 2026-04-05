@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ars548_messages</name>
+  <version>0.1.0</version>
+  <description>Custom messages for ARS548 Driver</description>
+  <maintainer email="fernando@todo.todo">David Alejo</maintainer>
+  <license>BSD3</license>
+  <depend>std_msgs</depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

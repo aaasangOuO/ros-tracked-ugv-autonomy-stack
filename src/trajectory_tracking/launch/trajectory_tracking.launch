@@ -1,0 +1,13 @@
+<launch>
+
+  <!-- <arg name="originOffsetX" default="441384.21082030656"/>
+  <arg name="originOffsetY" default="4423188.6479534665"/>
+  <arg name="originOffsetZ" default="53.646797094494104"/> -->
+
+  <node pkg="trajectory_tracking" type="trajectory_tracking" name="trajectory_tracking" output="screen" required="true">
+    <!-- <param name="originOffsetX" type="double" value="$(arg originOffsetX)" />
+    <param name="originOffsetY" type="double" value="$(arg originOffsetY)" />
+    <param name="originOffsetZ" type="double" value="$(arg originOffsetZ)" /> -->
+  </node>
+
+</launch>

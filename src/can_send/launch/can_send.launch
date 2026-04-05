@@ -1,0 +1,8 @@
+<launch>
+    <!-- 加载PID参数配置文件 -->
+    <rosparam command="load" file="$(find can_send)/config/pid_params.yaml" />
+    
+    <!-- 启动can_sender_node节点 -->
+    <node name="cansend_node" pkg="can_send" type="cansend_node" output="screen">
+    </node>
+</launch>
